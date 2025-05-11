@@ -20,8 +20,8 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
-      - name: Show build output for debugging
-        run: ls -R build/libs
+      - name: List built files
+        run: ls -la build/libs
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v3
