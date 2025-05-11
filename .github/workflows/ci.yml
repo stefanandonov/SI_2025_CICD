@@ -18,13 +18,16 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew clean build
 
-      - name: Upload build folder
+      - name: Show build output for debugging
+        run: ls -R build/libs
+
+      - name: Upload JAR artifact
         uses: actions/upload-artifact@v3
         with:
-          name: build-folder
-          path: build/
+          name: app-jar
+          path: build/libs/*.jar
 
   test:
     runs-on: ubuntu-latest
@@ -39,11 +42,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Download build artifacts
+      - name: Download JAR artifact
         uses: actions/download-artifact@v3
         with:
-          name: build-folder
-          path: build/
+          name: app-jar
+          path: build/libs/
 
       - name: Run Tests
         run: ./gradlew test
@@ -55,11 +58,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Download build artifacts
+      - name: Download JAR artifact
         uses: actions/download-artifact@v3
         with:
-          name: build-folder
-          path: build/
+          name: app-jar
+          path: build/libs/
 
       - name: Log in to DockerHub
         run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
