@@ -5,7 +5,7 @@ FROM openjdk:17
 WORKDIR /app
 
 # Copy build files
-COPY build/libs/reverse-words-app.jar app.jar
+COPY build/libs/app-jar app.jar
 
 # Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
