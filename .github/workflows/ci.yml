@@ -20,11 +20,11 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
-      - name: Upload build artifacts
+      - name: Upload build folder
         uses: actions/upload-artifact@v3
         with:
-          name: build-artifacts
-          path: build/libs/*.jar
+          name: build-folder
+          path: build/
 
   test:
     runs-on: ubuntu-latest
@@ -42,7 +42,8 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
-          name: build-artifacts
+          name: build-folder
+          path: build/
 
       - name: Run Tests
         run: ./gradlew test
@@ -54,13 +55,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Log in to DockerHub
-        run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
-          name: build-artifacts
+          name: build-folder
+          path: build/
+
+      - name: Log in to DockerHub
+        run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
       - name: Build Docker image with branch tag
         run: |
