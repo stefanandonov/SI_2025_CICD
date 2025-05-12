@@ -19,6 +19,14 @@ application {
     mainClass = 'app.ReverseWordsApp'
 }
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'app.ReverseWordsApp'
+        )
+    }
+}
+
 test {
     useJUnitPlatform()
 }
