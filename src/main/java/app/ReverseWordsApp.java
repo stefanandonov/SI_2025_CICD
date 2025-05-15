@@ -13,8 +13,8 @@ public class ReverseWordsApp {
     public static String reverseWords(String sentence) {
         String[] words = sentence.split("\s+");
         StringBuilder result = new StringBuilder();
-        for (String word : words) {
-            result.append(new StringBuilder(word).reverse()).append(" ");
+        for (int i=0;i<words.length-1;i++) {
+            result.append(new StringBuilder(words[i]).reverse()).append(" ");
         }
         return result.toString().trim();
     }
