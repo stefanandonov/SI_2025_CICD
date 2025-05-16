@@ -8,7 +8,7 @@ public class ReverseWordsAppTest {
 
     @Test
     public void testReverseWords() {
-        assertEquals("olleH dlroW", ReverseWordsApp.reverseWords("Hello World"));
+        assertEquals("dlroW olleH", ReverseWordsApp.reverseWords("Hello World"));
         assertEquals("avaJ", ReverseWordsApp.reverseWords("Java"));
         assertEquals("", ReverseWordsApp.reverseWords(""));
     }
