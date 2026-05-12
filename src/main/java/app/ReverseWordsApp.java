@@ -24,7 +24,7 @@ public class ReverseWordsApp {
         String[] words = sentence.split("\s+");
         StringBuilder result = new StringBuilder();
         for (int i=0;i<words.length;i++) {
-            result.append(new StringBuilder(words[i]).reverse()).append(" ");
+            result.append(new StringBuilder(words[i]).reverse()).append("\n");
         }
         return result.toString().trim();
     }
